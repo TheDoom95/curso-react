@@ -1,24 +1,55 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { ChangeEvent, useRef, useState } from 'react';
 
-function App() {
+const App = () => {
+  const [data, setData] = useState<string>('default');
+  const [list, setList] = useState<string[]>([]);
+  const inputs = useRef<HTMLInputElement[]>([]);
+
+  const handleOnChange = (ev: ChangeEvent<HTMLInputElement>) => {
+    const { value } = ev.target;
+    setData(value);
+  }
+
+  const save = () => {
+    setList([...list, data]);
+  }
+
+  const remove = (index: number) => {
+    setList(list.filter((value: string, i: number) => i !== index));
+  }
+
+  const edit = (index: number) => {
+    const newValue = inputs.current[index].value;
+    setList(list.map((value: string, i: number) => i === index ? newValue : value));
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <div>
+        {
+          list.map((text: string, index: number) => (
+            <div key={index + text}>
+              <span>{index}: </span>
+              <input
+                type="text"
+                defaultValue={text}
+                ref={(input: HTMLInputElement) => inputs.current[index] = input}
+              />
+
+              <button onClick={() => edit(index)}>Editar</button>
+              <button onClick={() => remove(index)}>Borrar</button>
+            </div>
+          ))
+        }
+      </div>
+
+      <input
+        placeholder="Introduce una tarea"
+        onChange={handleOnChange}
+        defaultValue={data}
+      />
+
+      <button onClick={save}>Guardar</button>
     </div>
   );
 }
