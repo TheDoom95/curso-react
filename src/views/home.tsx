@@ -8,7 +8,7 @@ const Home = () => {
 
             <ul>
                 <li>
-                    <Link className="text-blue-600 underline" to="/todolist">TODO List</Link>
+                    <Link className="text-blue-600 underline mb-1" to="/todolist">TODO List</Link>
                 </li>
 
                 <li>
