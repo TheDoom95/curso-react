@@ -12,7 +12,7 @@ const Home = () => {
                 </li>
 
                 <li>
-                    <Link className="text-blue-600 underline" to="/fetch">Fetch</Link>
+                    <Link className="text-blue-600 underline mb-1" to="/fetch">Fetch</Link>
                 </li>
             </ul>
         </div>
