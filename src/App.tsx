@@ -1,9 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import Fetch from './views/fetch';
-import Home from './views/home';
-import NoMatch from './views/no_match';
-import TodoList from './views/todolist';
+import { Fetch, Home, TodoList, NoMatch } from './views';
 
 const App = () => (
   <BrowserRouter basename="/curso-react">
